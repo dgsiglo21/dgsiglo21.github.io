@@ -169,11 +169,14 @@
   }
 
   /* aparición escalonada: cada tarjeta entra un poco después que la anterior */
-  .event-list .event-card:nth-child(1) { animation-delay: 0.28s; }
-  .event-list .event-card:nth-child(2) { animation-delay: 0.36s; }
-  .event-list .event-card:nth-child(3) { animation-delay: 0.44s; }
-  .event-list .event-card:nth-child(4) { animation-delay: 0.52s; }
-  .event-list .event-card:nth-child(5) { animation-delay: 0.6s; }
+  .event-list > :nth-child(1) { animation-delay: 0.28s; }
+  .event-list > :nth-child(2) { animation-delay: 0.36s; }
+  .event-list > :nth-child(3) { animation-delay: 0.44s; }
+  .event-list > :nth-child(4) { animation-delay: 0.52s; }
+  .event-list > :nth-child(5) { animation-delay: 0.60s; }
+  .event-list > :nth-child(6) { animation-delay: 0.68s; }
+  .event-list > :nth-child(7) { animation-delay: 0.76s; }
+  .event-list > :nth-child(8) { animation-delay: 0.84s; }
 
   .event-card:hover {
     transform: translate(-4px, -4px);
@@ -323,6 +326,250 @@
     transform: translateX(1px);
   }
 
+  /* ---------- TARJETA CON FLYER (evento especial, interactiva) ---------- */
+  /* Para sumar otro flyer: copiá el bloque <article class="flyer-card">…</article> */
+  /* y cambiá la imagen (carpeta img/), los textos y los datos de la reunión.        */
+  .flyer-card {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 3.7vw, 20px);
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .flyer-stage {
+    position: relative;
+    perspective: 900px;
+  }
+
+  .flyer-stage::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: calc(var(--radius-card) + 6px);
+    border: 3px solid var(--blue);
+    opacity: 0;
+    pointer-events: none;
+    animation: pulseRing 2.4s ease-out infinite;
+  }
+
+  .flyer-tilt {
+    display: block;
+    border: 4px solid var(--ink);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(-1.2deg);
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: flyerSway 6s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .flyer-tilt.is-tilting {
+    animation: none;
+    transition: transform 0.08s linear;
+  }
+
+  .flyer-tilt img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @keyframes flyerSway {
+    0%, 100% { transform: rotate(-1.2deg); }
+    50% { transform: rotate(1deg) translateY(-3px); }
+  }
+
+  .flyer-sticker {
+    position: absolute;
+    top: -14px;
+    right: -10px;
+    width: clamp(72px, 19vw, 92px);
+    height: clamp(72px, 19vw, 92px);
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .flyer-sticker svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: spinSlow 14s linear infinite;
+  }
+
+  .flyer-sticker span {
+    position: relative;
+    font-size: clamp(11px, 2.8vw, 14px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    text-align: center;
+    transform: rotate(8deg);
+  }
+
+  @keyframes spinSlow {
+    to { transform: rotate(360deg); }
+  }
+
+  .flyer-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--blue);
+    color: var(--white);
+    border: var(--border) solid var(--ink);
+    border-radius: var(--radius-card);
+    padding: clamp(18px, 4.6vw, 26px) clamp(20px, 5.4vw, 30px);
+  }
+
+  .flyer-panel .event-date {
+    padding-right: 0;
+  }
+
+  .flyer-title {
+    font-size: clamp(19px, 5vw, 25px);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  .flyer-text {
+    font-size: clamp(13px, 3.1vw, 16px);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .flyer-text strong {
+    color: var(--white);
+    font-weight: 800;
+  }
+
+  .flyer-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 6px;
+    background: var(--green);
+    color: var(--ink);
+    border: var(--border) solid var(--ink);
+    border-radius: 999px;
+    padding: clamp(12px, 3.4vw, 16px) 20px;
+    font-size: clamp(15px, 3.8vw, 18px);
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 0 0 var(--ink);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .flyer-cta:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  .flyer-cta:active {
+    transform: translate(0, 0) scale(0.98);
+    box-shadow: 0 0 0 var(--ink);
+  }
+
+  .flyer-details {
+    margin-top: 4px;
+    background: rgba(0, 0, 0, 0.22);
+    border-radius: calc(var(--radius-card) - 8px);
+    padding: clamp(10px, 2.8vw, 14px) clamp(14px, 3.6vw, 18px);
+  }
+
+  .flyer-details summary {
+    cursor: pointer;
+    font-size: clamp(12px, 2.9vw, 14px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--yellow);
+    list-style-position: inside;
+  }
+
+  .flyer-data {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .flyer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .flyer-label {
+    display: block;
+    font-size: clamp(11px, 2.6vw, 12px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .flyer-value {
+    display: block;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: clamp(14px, 3.6vw, 17px);
+    font-weight: 700;
+    color: var(--white);
+    word-break: break-all;
+  }
+
+  .copy-btn {
+    flex: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: clamp(12px, 2.9vw, 14px);
+    font-weight: 800;
+    background: var(--white);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 7px 14px;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .copy-btn:hover {
+    background: var(--yellow);
+  }
+
+  .copy-btn:active {
+    transform: scale(0.95);
+  }
+
+  .copy-btn.is-copied {
+    background: var(--green);
+  }
+
+  .flyer-cta:focus-visible,
+  .copy-btn:focus-visible,
+  .flyer-details summary:focus-visible,
+  .event-card:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flyer-tilt,
+    .flyer-stage::before,
+    .flyer-sticker svg,
+    .event-card.featured::before,
+    .deco {
+      animation: none;
+    }
+  }
+
   /* ---------- FOOTER ---------- */
   .footer {
     text-align: center;
@@ -374,7 +621,51 @@
   <!-- ============================================================ -->
   <div class="event-list">
 
-    <!-- Pegá los eventos nuevos ACÁ ARRIBA (el más reciente primero). Los finalizados van al final con class="event-card ended" -->
+    <!-- Para un evento con flyer: copiá el bloque <article class="flyer-card"> de abajo. Pegá los eventos nuevos ACÁ ARRIBA (el más reciente primero). Los finalizados van al final con class="event-card ended" -->
+
+    <!-- ===== CLASE ABIERTA: Pauta Modular y Grilla Constructiva (flyer interactivo) ===== -->
+    <article class="flyer-card">
+      <div class="flyer-stage">
+        <div class="flyer-sticker" aria-hidden="true">
+          <svg viewBox="0 0 1393.31 1385.68" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#06c730" stroke="#000" stroke-width="22" points="696.66 17.72 781.84 299.73 974.36 76.75 937.48 369.02 1204.05 243.63 1051.48 495.63 1346.01 489.51 1104.13 657.67 1375.69 771.86 1086.32 827.1 1287.95 1041.88 1001.14 974.65 1097.98 1252.87 863.3 1074.79 838.61 1368.34 696.66 1110.21 554.7 1368.34 530.01 1074.79 295.33 1252.87 392.18 974.65 105.36 1041.88 306.99 827.1 17.63 771.86 289.18 657.67 47.3 489.51 341.83 495.63 189.26 243.63 455.83 369.02 418.95 76.75 611.47 299.73 696.66 17.72"/>
+          </svg>
+          <span>¡Sumate!</span>
+        </div>
+        <div class="flyer-tilt" data-tilt>
+          <img src="img/flyer-clase-abierta.webp" width="1500" height="2000" alt="Flyer de la clase abierta de Identidad Visual: Pauta Modular y Grilla Constructiva, a cargo de Camila Young Romanutti. Miércoles 21 de octubre, 19 horas, modalidad virtual.">
+        </div>
+      </div>
+
+      <div class="flyer-panel">
+        <span class="event-date">Miércoles 21 de octubre · 19:00hs · Virtual</span>
+        <h2 class="flyer-title">Clase abierta: Pauta Modular y Grilla Constructiva</h2>
+        <p class="flyer-text"><strong>Identidad Visual.</strong> ¿Cómo desarrollarlas correctamente? Vemos cuándo hace falta una pauta modular, cuándo una grilla constructiva y qué diferencias hay entre ambas.</p>
+        <p class="flyer-text">A cargo de <strong>Camila Young Romanutti</strong> · Para alumnos de Seminario Final y Diseño Gráfico en general.</p>
+
+        <a class="flyer-cta" href="https://teams.microsoft.com/meet/270338554845282?p=ab4AvyQK3mhPu5itkJ" target="_blank" rel="noopener noreferrer">Unirme a la reunión de Teams <span aria-hidden="true">→</span></a>
+
+        <details class="flyer-details" open>
+          <summary>Datos de la reunión</summary>
+          <div class="flyer-data">
+            <div class="flyer-row">
+              <div>
+                <span class="flyer-label">ID de reunión</span>
+                <span class="flyer-value">270 338 554 845 282</span>
+              </div>
+              <button class="copy-btn" type="button" data-copy="270 338 554 845 282">Copiar</button>
+            </div>
+            <div class="flyer-row">
+              <div>
+                <span class="flyer-label">Código de acceso</span>
+                <span class="flyer-value">dH7Pt9MT</span>
+              </div>
+              <button class="copy-btn" type="button" data-copy="dH7Pt9MT">Copiar</button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </article>
 
     <!-- Make-a-thon FoF Córdoba -->
     <a class="event-card" href="https://friends.figma.com/events/details/figma-cordoba-presents-figma-make-a-thon/" target="_blank" rel="noopener noreferrer">
@@ -435,6 +726,56 @@
   </footer>
 
 </div>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('[data-tilt]').forEach(function (el) {
+      if (reduce) return;
+      el.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        el.classList.add('is-tilting');
+        el.style.transform = 'rotateY(' + (x * 10).toFixed(2) + 'deg) rotateX(' + (-y * 10).toFixed(2) + 'deg) scale(1.02)';
+      });
+      el.addEventListener('pointerleave', function () {
+        el.classList.remove('is-tilting');
+        el.style.transform = '';
+      });
+    });
+
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy');
+        var done = function () {
+          var old = btn.textContent;
+          btn.textContent = '¡Copiado!';
+          btn.classList.add('is-copied');
+          setTimeout(function () { btn.textContent = old; btn.classList.remove('is-copied'); }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+        } else {
+          fallback(text, done);
+        }
+      });
+    });
+
+    function fallback(text, done) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) {}
+      document.body.removeChild(ta);
+    }
+  })();
+</script>
 
 </body>
 </html>
