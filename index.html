@@ -328,7 +328,7 @@
 
   /* ---------- TARJETA CON FLYER (evento especial, interactiva) ---------- */
   /* Para sumar otro flyer: copiá el bloque <article class="flyer-card">…</article> */
-  /* y cambiá la imagen (carpeta img/), los textos y los datos de la reunión.        */
+  /* y cambiá la imagen (carpeta img/) y los textos.                                 */
   .flyer-card {
     display: flex;
     flex-direction: column;
@@ -570,6 +570,94 @@
     }
   }
 
+  /* ---------- SECCIONES ---------- */
+  .container > .event-list + .section-label {
+    margin-top: clamp(28px, 7.5vw, 44px);
+  }
+
+  .empty-state {
+    border: var(--border) dashed var(--ink);
+    border-radius: var(--radius-card);
+    padding: clamp(18px, 4.6vw, 26px) clamp(20px, 5.4vw, 30px);
+    font-size: clamp(14px, 3.4vw, 17px);
+    font-weight: 600;
+    line-height: 1.4;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .empty-state strong {
+    font-weight: 800;
+  }
+
+  /* ---------- TARJETA DE MATERIAL (contenido disponible para descargar) ---------- */
+  .flyer-panel.is-material {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  .flyer-panel.is-material .event-date {
+    color: var(--blue);
+  }
+
+  .flyer-panel.is-material .flyer-title {
+    color: var(--ink);
+  }
+
+  .flyer-panel.is-material .flyer-text {
+    color: rgba(0, 0, 0, 0.78);
+  }
+
+  .flyer-panel.is-material .flyer-text strong {
+    color: var(--ink);
+  }
+
+  .material-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .material-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: calc(var(--radius-card) - 10px);
+    padding: clamp(10px, 2.8vw, 14px) clamp(12px, 3.4vw, 16px);
+  }
+
+  .material-tag {
+    flex: none;
+    min-width: 3.6em;
+    text-align: center;
+    font-size: clamp(10px, 2.5vw, 12px);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 5px 10px;
+  }
+
+  .material-name {
+    display: block;
+    font-size: clamp(13px, 3.3vw, 16px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .material-meta {
+    display: block;
+    margin-top: 2px;
+    font-size: clamp(12px, 2.9vw, 14px);
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
   /* ---------- FOOTER ---------- */
   .footer {
     text-align: center;
@@ -610,65 +698,83 @@
     <h1>Charlas, talleres y convocatorias</h1>
   </header>
 
+  <!-- ============================================================ -->
+  <!-- La página tiene 3 secciones, de arriba hacia abajo:            -->
+  <!--   1) PRÓXIMOS EVENTOS   (lo más nuevo ARRIBA)                  -->
+  <!--   2) MATERIAL DE LA CARRERA (clases/talleres con contenido)    -->
+  <!--   3) EVENTOS FINALIZADOS (los vencidos, con "Finalizado")      -->
+  <!-- Para AGREGAR un evento: copiá un bloque <a class="event-card">…</a> -->
+  <!-- y pegalo en la sección que corresponda. Si ya hay eventos      -->
+  <!-- próximos, borrá el cartel punteado <p class="empty-state">.    -->
+  <!-- Para pasar un evento a finalizados: movelo a la sección 3, y   -->
+  <!-- agregá class="event-card ended" + <span class="ended-badge">Finalizado</span> -->
+  <!-- ============================================================ -->
+
   <div class="section-label">Próximos eventos</div>
 
-  <!-- ============================================================ -->
-  <!-- LISTA DE EVENTOS (lo más nuevo ARRIBA, lo más viejo ABAJO)     -->
-  <!-- Para AGREGAR un evento nuevo: copiá un bloque <a class="event-card">…</a> -->
-  <!-- completo y pegalo justo debajo de <div class="event-list">,    -->
-  <!-- editando el href, la fecha, el título y el subtítulo.          -->
-  <!-- Para BORRAR un evento: eliminá su bloque <a class="event-card">…</a> entero. -->
-  <!-- ============================================================ -->
   <div class="event-list">
 
-    <!-- Para un evento con flyer: copiá el bloque <article class="flyer-card"> de abajo. Pegá los eventos nuevos ACÁ ARRIBA (el más reciente primero). Los finalizados van al final con class="event-card ended" -->
+    <!-- Pegá los eventos próximos ACÁ (el más reciente primero) -->
 
-    <!-- ===== CLASE ABIERTA: Pauta Modular y Grilla Constructiva (flyer interactivo) ===== -->
+    <p class="empty-state"><strong>Todavía no hay fechas nuevas.</strong> Pronto sumamos charlas, talleres y convocatorias: volvé a pasar por acá.</p>
+
+  </div>
+
+  <div class="section-label">Material de la carrera</div>
+
+  <div class="event-list">
+
+    <!-- Pegá el material nuevo ACÁ ARRIBA (copiá el bloque <article class="flyer-card"> de abajo) -->
+
+    <!-- ===== MATERIAL: Clase de Pauta Modular y Grilla Constructiva (21/10) ===== -->
     <article class="flyer-card">
       <div class="flyer-stage">
         <div class="flyer-sticker" aria-hidden="true">
           <svg viewBox="0 0 1393.31 1385.68" xmlns="http://www.w3.org/2000/svg">
             <polygon fill="#06c730" stroke="#000" stroke-width="22" points="696.66 17.72 781.84 299.73 974.36 76.75 937.48 369.02 1204.05 243.63 1051.48 495.63 1346.01 489.51 1104.13 657.67 1375.69 771.86 1086.32 827.1 1287.95 1041.88 1001.14 974.65 1097.98 1252.87 863.3 1074.79 838.61 1368.34 696.66 1110.21 554.7 1368.34 530.01 1074.79 295.33 1252.87 392.18 974.65 105.36 1041.88 306.99 827.1 17.63 771.86 289.18 657.67 47.3 489.51 341.83 495.63 189.26 243.63 455.83 369.02 418.95 76.75 611.47 299.73 696.66 17.72"/>
           </svg>
-          <span>¡Sumate!</span>
+          <span>¡Bajalo!</span>
         </div>
         <div class="flyer-tilt" data-tilt>
-          <img src="img/flyer-clase-abierta.webp" width="1500" height="2000" alt="Flyer de la clase abierta de Identidad Visual: Pauta Modular y Grilla Constructiva, a cargo de Camila Young Romanutti. Miércoles 21 de octubre, 19 horas, modalidad virtual.">
+          <img src="img/flyer-clase-abierta.webp" width="1500" height="2000" alt="Flyer de la clase abierta de Identidad Visual: Pauta Modular y Grilla Constructiva, a cargo de Camila Young Romanutti, realizada el miércoles 21 de octubre en modalidad virtual.">
         </div>
       </div>
 
-      <div class="flyer-panel">
-        <span class="event-date">Miércoles 21 de octubre · 19:00hs · Virtual</span>
-        <h2 class="flyer-title">Clase abierta: Pauta Modular y Grilla Constructiva</h2>
-        <p class="flyer-text"><strong>Identidad Visual.</strong> ¿Cómo desarrollarlas correctamente? Vemos cuándo hace falta una pauta modular, cuándo una grilla constructiva y qué diferencias hay entre ambas.</p>
-        <p class="flyer-text">A cargo de <strong>Camila Young Romanutti</strong> · Para alumnos de Seminario Final y Diseño Gráfico en general.</p>
+      <div class="flyer-panel is-material">
+        <span class="event-date">Clase del 21/10 · Material disponible</span>
+        <h3 class="flyer-title">Pauta Modular y Grilla Constructiva</h3>
+        <p class="flyer-text"><strong>Identidad Visual.</strong> ¿Te perdiste la clase abierta o querés repasarla? Acá está todo para ver y descargar, a cargo de <strong>Camila Young Romanutti</strong>.</p>
 
-        <a class="flyer-cta" href="https://teams.microsoft.com/meet/270338554845282?p=ab4AvyQK3mhPu5itkJ" target="_blank" rel="noopener noreferrer">Unirme a la reunión de Teams <span aria-hidden="true">→</span></a>
+        <ul class="material-list">
+          <li>
+            <span class="material-tag">PDF</span>
+            <span>
+              <span class="material-name">Presentación PM / GC</span>
+              <span class="material-meta">Las diapositivas de la clase · 7 MB</span>
+            </span>
+          </li>
+          <li>
+            <span class="material-tag">Video</span>
+            <span>
+              <span class="material-name">Grabación de la clase</span>
+              <span class="material-meta">Clase completa del 21/10 · unos 490 MB, mejor con Wi-Fi</span>
+            </span>
+          </li>
+        </ul>
 
-        <details class="flyer-details" open>
-          <summary>Datos de la reunión</summary>
-          <div class="flyer-data">
-            <div class="flyer-row">
-              <div>
-                <span class="flyer-label">ID de reunión</span>
-                <span class="flyer-value">270 338 554 845 282</span>
-              </div>
-              <button class="copy-btn" type="button" data-copy="270 338 554 845 282">Copiar</button>
-            </div>
-            <div class="flyer-row">
-              <div>
-                <span class="flyer-label">Código de acceso</span>
-                <span class="flyer-value">dH7Pt9MT</span>
-              </div>
-              <button class="copy-btn" type="button" data-copy="dH7Pt9MT">Copiar</button>
-            </div>
-          </div>
-        </details>
+        <a class="flyer-cta" href="https://drive.google.com/drive/folders/1pFDX8J4EQRtkine3orkF94a65aDPjQfn?usp=sharing" target="_blank" rel="noopener noreferrer">Abrir carpeta en Drive <span aria-hidden="true">→</span></a>
       </div>
     </article>
 
-    <!-- Make-a-thon FoF Córdoba -->
-    <a class="event-card" href="https://friends.figma.com/events/details/figma-cordoba-presents-figma-make-a-thon/" target="_blank" rel="noopener noreferrer">
+  </div>
+
+  <div class="section-label">Eventos finalizados</div>
+
+  <div class="event-list">
+
+    <!-- Make-a-thon FoF Córdoba (finalizado) -->
+    <a class="event-card ended" href="https://friends.figma.com/events/details/figma-cordoba-presents-figma-make-a-thon/" target="_blank" rel="noopener noreferrer">
+      <span class="ended-badge">Finalizado</span>
       <span class="event-date">22 de octubre - 18:30hs</span>
       <span class="event-title">Make-a-thon FoF Córdoba: Figma Make</span>
       <span class="event-subtitle">Universidad Siglo 21, Sede Nueva Córdoba · Equipos de 2 a 4 · Traé tu compu</span>
@@ -679,19 +785,18 @@
       </span>
     </a>
 
-    <!-- IV Hackaton -->
-    <a class="event-card" href="https://teams.microsoft.com/meet/251029246902052?p=6NZVVx4YYwSJE5p3rK" target="_blank" rel="noopener noreferrer">
+    <!-- IV Hackaton (finalizado) -->
+    <a class="event-card ended" href="https://teams.microsoft.com/meet/251029246902052?p=6NZVVx4YYwSJE5p3rK" target="_blank" rel="noopener noreferrer">
+      <span class="ended-badge">Finalizado</span>
       <span class="event-date">1er Encuentro 17/9 - 14hs · Virtual</span>
       <span class="event-title">IV Hackaton: Narrativas Co-responsables</span>
-      <span class="event-subtitle">Premiación 15/10 - 14hs · Modalidad híbrida · Unirte a la reunión</span>
+      <span class="event-subtitle">Premiación 15/10 - 14hs · Modalidad híbrida</span>
       <span class="event-go" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 12h14M13 6l6 6-6 6" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
     </a>
-
-    <!-- ===== FINALIZADOS (abajo de todo) ===== -->
 
     <!-- Rally Creativo - Semana 21 (finalizado) -->
     <a class="event-card ended" href="https://bit.ly/4rpwogP" target="_blank" rel="noopener noreferrer">
