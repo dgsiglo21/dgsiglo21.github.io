@@ -670,6 +670,193 @@
     color: var(--ink);
     opacity: 0.6;
   }
+
+  /* ============================================================ */
+  /* TABLET Y COMPUTADORA: el contenido se ensancha y se acomoda   */
+  /* en columnas. La vista de celular (arriba) queda igual.        */
+  /* ============================================================ */
+  @media (min-width: 760px) {
+    :root {
+      --max-width: 800px;
+    }
+
+    body {
+      padding-top: 72px;
+      padding-bottom: 56px;
+    }
+
+    .deco-yellow {
+      top: -90px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+    }
+
+    .deco-orange {
+      bottom: -150px;
+      left: -130px;
+      width: 400px;
+      height: 400px;
+    }
+
+    .header {
+      margin-bottom: 48px;
+    }
+
+    .logo-box {
+      width: 200px;
+      height: 200px;
+    }
+
+    .header h1 {
+      font-size: clamp(38px, 4.8vw, 56px);
+      max-width: 20ch;
+      margin-left: auto;
+      margin-right: auto;
+      text-wrap: balance;
+    }
+
+    .section-label {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .container > .event-list + .section-label {
+      margin-top: 56px;
+    }
+
+    .event-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .event-list > .empty-state,
+    .event-list > .flyer-card {
+      grid-column: 1 / -1;
+    }
+
+    .event-card {
+      padding: 28px 32px;
+    }
+
+    .event-date {
+      font-size: 14px;
+    }
+
+    .event-title {
+      font-size: 24px;
+    }
+
+    .event-subtitle {
+      font-size: 16px;
+    }
+
+    .event-go {
+      width: 42px;
+      height: 42px;
+      right: 24px;
+      bottom: 24px;
+    }
+
+    .event-go svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .empty-state {
+      padding: 28px 32px;
+      font-size: 17px;
+    }
+
+    .flyer-card {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 36px;
+      align-items: stretch;
+    }
+
+    .flyer-stage {
+      align-self: center;
+    }
+
+    .flyer-panel {
+      justify-content: center;
+      gap: 12px;
+      padding: 34px 38px;
+    }
+
+    .flyer-panel .event-date {
+      font-size: 14px;
+    }
+
+    .flyer-title {
+      font-size: clamp(26px, 3vw, 34px);
+    }
+
+    .flyer-text {
+      font-size: 17px;
+    }
+
+    .material-name {
+      font-size: 17px;
+    }
+
+    .material-meta {
+      font-size: 14px;
+    }
+
+    .material-tag {
+      font-size: 12px;
+    }
+
+    .flyer-cta {
+      align-self: flex-start;
+      padding: 16px 32px;
+      font-size: 18px;
+    }
+
+    .footer {
+      margin-top: 64px;
+    }
+
+    .footer p {
+      font-size: 13px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    :root {
+      --max-width: 1040px;
+    }
+
+    .deco-yellow {
+      top: -140px;
+      right: -170px;
+      width: 400px;
+      height: 400px;
+    }
+
+    .deco-orange {
+      bottom: -170px;
+      left: -210px;
+      width: 460px;
+      height: 460px;
+    }
+
+    .logo-box {
+      width: 220px;
+      height: 220px;
+    }
+
+    .event-list {
+      gap: 28px;
+    }
+
+    .flyer-card {
+      gap: 48px;
+    }
+  }
 </style>
 </head>
 <body>
